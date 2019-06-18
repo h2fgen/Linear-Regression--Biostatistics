@@ -1,0 +1,39 @@
+Sub Linear_Regression()
+n = 20
+
+Dim x(20)
+Dim y(20)
+
+For i = 1 To n
+    x(i) = Cells(1 + i, 1)
+    y(i) = Cells(1 + i, 2)
+Next i
+
+sumx = 0
+Sumy = 0
+sumxy = 0
+sumx2 = 0
+For i = 1 To n
+    sumx = sumx + x(i)
+    Sumy = Sumy + y(i)
+    sumxy = sumxy + x(i) * y(i)
+    sumx2 = sumx2 + x(i) * x(i)
+Next i
+
+b = (n * sumxy - sumx * Sumy) / (n * sumx2 - (sumx) ^ 2)
+ym = Sumy / n
+xm = sumx / n
+a = ym - b * xm
+st = 0
+sr = 0
+For i = 1 To n
+    st = st + (y(i) - ym) ^ 2
+    sr = sr + (y(i) - a - b * x(i)) ^ 2
+Next i
+r2 = (st - sr) / st
+
+Cells(18, 5) = a
+Cells(19, 5) = b
+Cells(20, 5) = r2
+
+End Sub
